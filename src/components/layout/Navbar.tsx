@@ -9,7 +9,7 @@ import { IconLink } from "../ui/IconLink";
 import { NavbarMenu } from "./NavbarMenu";
 import { isActivePath, navLinks } from "./utilsLayout";
 
-// Styles for links
+// Styles for linksss
 export const linkClassName = (active: boolean) =>
   [
     "text-sm transition-colors",
