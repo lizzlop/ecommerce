@@ -1,15 +1,11 @@
+import { ProductCard } from "@/features/products/ProductCard";
 import products from "@/mocks/products.json";
 
 export default function Products() {
-  console.log(products);
   return (
-    <div>
+    <div className="flex flex-wrap justify-center">
       {products.map((product) => (
-        <div key={product.id}>
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-          <p>{product.price}</p>
-        </div>
+        <ProductCard product={product} key={product.id} /> //TODO: Cambiar data
       ))}
     </div>
   );

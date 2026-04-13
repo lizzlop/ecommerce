@@ -1,9 +1,14 @@
 export type Product = {
-  id: string;
+  id: number;
   name: string;
-  price: number;
+  image: string | null;
+  description: string;
   category: string;
-  stock: number;
+  subcategory: string;
+  price: number;
+  discount: number | null;
+  rating: number;
+  ratingNumber: number;
 };
 
 export type cart = Product & {

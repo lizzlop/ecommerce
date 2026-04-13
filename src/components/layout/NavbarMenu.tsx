@@ -37,7 +37,7 @@ export function NavbarMenu({
       if (!menuRef.current) return;
       if (!(event.target instanceof Node)) return;
 
-      // Si el click NO fue dentro del menú, cerramos
+      // If clicks outside the menu, it closes
       if (!menuRef.current.contains(event.target)) {
         setMenuMobileOpen(false);
       }
