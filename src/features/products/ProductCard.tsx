@@ -1,9 +1,12 @@
 "use client";
 
-import { HeartIcon, ShoppingCartIcon } from "@/components/icons";
-import VisibilityIcon from "@/components/icons/VisibilityIcon";
-import { Product } from "@/types";
 import Image from "next/image";
+import {
+  HeartIcon,
+  ShoppingCartIcon,
+  VisibilityIcon,
+} from "@/components/icons";
+import { Product } from "@/types";
 import { Rating } from "./Rating";
 
 type Props = {
@@ -14,25 +17,51 @@ const getFullPrice = (price: number, discount: number) => {
   return Math.round((100 * price) / (100 - discount)).toFixed(2);
 };
 
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+});
+
 export const ProductCard = ({ product }: Readonly<Props>) => {
+  const hasImage = Boolean(product.image);
+
   return (
-    <div className="p-6 relative group">
+    <div className="p-6 relative group flex flex-row min-h-[140px] w-full sm:block sm:w-auto">
       {/* Image */}
-      <Image
-        src={product.image ?? ""}
-        alt={product.name}
-        className="rounded-xs"
-        width={250}
-        height={250}
-      />
+      {hasImage ? (
+        <Image
+          src={product.image as string}
+          alt={product.name}
+          className="rounded-xs w-50 h-50 object-cover sm:w-[250px] sm:h-[250px]"
+          width={250}
+          height={250}
+        />
+      ) : (
+        <Image
+          src={"/noImageAvailable.svg"}
+          alt={product.name}
+          className="rounded-xs w-50 h-50 object-cover sm:w-[250px] sm:h-[250px]"
+          width={250}
+          height={250}
+        />
+      )}
 
       {/* Like button */}
-      <button className="absolute top-8 right-8 bg-white/80 rounded-full p-1">
+      <button
+        type="button"
+        aria-label={`Add ${product.name} to favorites`}
+        className="hidden sm:block absolute top-8 right-8 bg-white/80 rounded-full p-1"
+      >
         <HeartIcon fillColor="currentColor" className="h-5 w-5" />
       </button>
 
       {/* Eye icon button */}
-      <button className="absolute top-17 right-8 bg-white/80 rounded-full p-1">
+      <button
+        type="button"
+        aria-label={`Preview ${product.name}`}
+        className="hidden sm:block absolute top-17 right-8 bg-white/80 rounded-full p-1"
+      >
         <VisibilityIcon fillColor="currentColor" className="h-5 w-5" />
       </button>
 
@@ -43,26 +72,55 @@ export const ProductCard = ({ product }: Readonly<Props>) => {
         </div>
       )}
 
-      {/* Add to cart badge */}
-      <button onClick={() => console.log("Slected product: ", product)}>
-        <div className="absolute top-59 left-6 flex bg-black text-white text-xs w-62.5 h-11 justify-center items-center cursor-pointer gap-2 rounded-b opacity-0 group-hover:opacity-100 transition">
-          <ShoppingCartIcon fillColor="white" className="h-7 w-7" /> Add To Cart
-        </div>
+      {/* Add to cart badge*/}
+      <button
+        type="button"
+        aria-label={`Add ${product.name} to cart`}
+        onClick={() => console.log("Selected product: ", product)}
+        className="hidden sm:flex absolute top-59 left-6 bg-black text-white text-xs w-62.5 h-11 justify-center items-center cursor-pointer gap-2 rounded-b opacity-0 group-hover:opacity-100 transition"
+      >
+        <ShoppingCartIcon fillColor="white" className="h-7 w-7" /> Add To Cart
       </button>
 
       {/* Name and price */}
-      <h2 className="text-ml font-bold">{product.name}</h2>
-      <div className="flex gap-4">
-        <p className="text-ml text-red-custom font-bold">{`$${product.price}`}</p>
-        {product.discount ? (
-          <p className="text-sm text-gray-500 font-medium line-through">{`$${getFullPrice(product.price, product.discount)}`}</p>
-        ) : (
-          ""
-        )}
-      </div>
+      <div className="ml-3 sm:ml-0 flex flex-col gap-4">
+        <h2 className="text-ml font-bold line-clamp-2">{product.name}</h2>
+        <div className="flex gap-4">
+          <p className="text-xl sm:text-ml text-red-custom font-bold">
+            {currencyFormatter.format(product.price)}
+          </p>
+          {product.discount ? (
+            <p className="text-xl sm:text-ml text-gray-500 font-medium line-through">
+              {currencyFormatter.format(
+                Number(getFullPrice(product.price, product.discount)),
+              )}
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
 
-      {/* Rating */}
-      <Rating rating={product.rating} ratingNumber={product.ratingNumber} />
+        {/* Rating */}
+        <Rating rating={product.rating} ratingNumber={product.ratingNumber} />
+
+        {/* Like and cart icon for mobile */}
+        <div className="flex">
+          <button
+            type="button"
+            aria-label={`Add ${product.name} to cart`}
+            className="block sm:hidden bg-black rounded-full p-2"
+          >
+            <ShoppingCartIcon fillColor="white" className="h-6 w-6" />
+          </button>
+          <button
+            type="button"
+            aria-label={`Add ${product.name} to favorites`}
+            className="block sm:hidden bg-white/80 rounded-full p-2"
+          >
+            <HeartIcon fillColor="currentColor" className="h-6 w-6" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

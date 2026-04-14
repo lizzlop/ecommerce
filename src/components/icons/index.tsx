@@ -4,3 +4,6 @@ export { default as MenuIcon } from "./MenuIcon";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as CloseIcon } from "./CloseIcon";
 export { default as ArrowForwardIcon } from "./ArrowForwardIcon";
+export { default as StarIcon } from "./StarIcon";
+export { default as StarHalfIcon } from "./StarHalfIcon";
+export { default as VisibilityIcon } from "./VisibilityIcon";
