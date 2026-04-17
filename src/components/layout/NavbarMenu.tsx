@@ -13,7 +13,7 @@ type NavbarMenuProps = {
 };
 
 // Styles for links
-export const linkMenuClassName = (active: boolean) =>
+export const linkMenuClassName = (active: boolean): string =>
   [
     "flex items-center justify-between border-b border-gray-200 p-2",
     "text-xs transition-colors",

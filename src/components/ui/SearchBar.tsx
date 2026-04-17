@@ -1,10 +1,13 @@
+import { JSX } from "react";
 import { SearchIcon } from "../icons";
 
 type SearchBarProps = {
   className?: string;
 };
 
-export const SearchBar = ({ className }: Readonly<SearchBarProps>) => {
+export const SearchBar = ({
+  className,
+}: Readonly<SearchBarProps>): JSX.Element => {
   return (
     <form
       role="search"

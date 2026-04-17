@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { JSX } from "react";
 
 type IconLinkProps = {
   href: `/${string}`;
@@ -10,7 +11,7 @@ export const IconLink = ({
   href,
   label,
   children,
-}: Readonly<IconLinkProps>) => {
+}: Readonly<IconLinkProps>): JSX.Element => {
   return (
     <Link
       href={href}

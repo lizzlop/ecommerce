@@ -8,12 +8,13 @@ import {
 } from "@/components/icons";
 import { Product } from "@/types";
 import { Rating } from "./Rating";
+import { JSX } from "react";
 
 type Props = {
   product: Product;
 };
 
-const getFullPrice = (price: number, discount: number) => {
+const getFullPrice = (price: number, discount: number): string => {
   return Math.round((100 * price) / (100 - discount)).toFixed(2);
 };
 
@@ -23,7 +24,7 @@ const currencyFormatter = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
 });
 
-export const ProductCard = ({ product }: Readonly<Props>) => {
+export const ProductCard = ({ product }: Readonly<Props>): JSX.Element => {
   const hasImage = Boolean(product.image);
 
   return (
@@ -77,7 +78,7 @@ export const ProductCard = ({ product }: Readonly<Props>) => {
         type="button"
         aria-label={`Add ${product.name} to cart`}
         onClick={() => console.log("Selected product: ", product)}
-        className="hidden sm:flex absolute top-59 left-6 bg-black text-white text-xs w-62.5 h-11 justify-center items-center cursor-pointer gap-2 rounded-b opacity-0 group-hover:opacity-100 transition"
+        className="hidden sm:flex absolute top-57.5 left-6 bg-black text-white text-xs w-62.5 h-11 justify-center items-center cursor-pointer gap-2 rounded-b opacity-0 group-hover:opacity-100 transition"
       >
         <ShoppingCartIcon fillColor="white" className="h-7 w-7" /> Add To Cart
       </button>

@@ -7,3 +7,7 @@ export { default as ArrowForwardIcon } from "./ArrowForwardIcon";
 export { default as StarIcon } from "./StarIcon";
 export { default as StarHalfIcon } from "./StarHalfIcon";
 export { default as VisibilityIcon } from "./VisibilityIcon";
+export { default as AddIcon } from "./AddIcon";
+export { default as DeliveryIcon } from "./DeliveryIcon";
+export { default as RemoveIcon } from "./RemoveIcon";
+export { default as ReturnIcon } from "./ReturnIcon";

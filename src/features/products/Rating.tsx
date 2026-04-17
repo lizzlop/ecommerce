@@ -1,11 +1,19 @@
 import { StarIcon, StarHalfIcon } from "@/components/icons";
+import { JSX } from "react";
 
 type Props = {
   rating: number;
   ratingNumber: number;
+  showStock?: boolean;
+  hasStock?: boolean;
 };
 
-export const Rating = ({ rating, ratingNumber }: Props) => {
+export const Rating = ({
+  rating,
+  ratingNumber,
+  showStock = false,
+  hasStock,
+}: Props): JSX.Element => {
   return (
     <div className="flex items-center gap-1">
       {Array.from({ length: 5 }, (_, i) => {
@@ -30,6 +38,15 @@ export const Rating = ({ rating, ratingNumber }: Props) => {
       })}
 
       <p className="text-sm text-gray-400 font-bold">{`(${ratingNumber})`}</p>
+
+      <div className="ml-4 flex gap-4">
+        <span className="text-gray-400">|</span>
+        {showStock && hasStock ? (
+          <span className="text-green-600">In Stock</span>
+        ) : (
+          <span className="text-gray-400">Out of Stock</span>
+        )}
+      </div>
     </div>
   );
 };

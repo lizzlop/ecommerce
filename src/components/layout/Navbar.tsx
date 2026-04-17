@@ -10,7 +10,7 @@ import { NavbarMenu } from "./NavbarMenu";
 import { isActivePath, navLinks } from "./utilsLayout";
 
 // Styles for links
-export const linkClassName = (active: boolean) =>
+export const linkClassName = (active: boolean): string =>
   [
     "text-sm transition-colors",
     "text-gray-600 hover:text-gray-900",

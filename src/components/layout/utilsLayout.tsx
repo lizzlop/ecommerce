@@ -11,7 +11,10 @@ export const navLinks: NavLinkItem[] = [
 ];
 
 // Generates active for the routes and the next nested routes
-export const isActivePath = (currentPathname: string, href: string) => {
+export const isActivePath = (
+  currentPathname: string,
+  href: string,
+): boolean => {
   if (href === "/") return currentPathname === "/";
   return currentPathname === href || currentPathname.startsWith(`${href}/`);
 };
